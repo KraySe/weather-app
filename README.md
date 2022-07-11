@@ -72,6 +72,37 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### TDD
 
+¿Qué es TDD?
+
+Test Driven Development (Desarrollo guiado por pruebas) 
+
+Primero escribir las pruebas y luego ir refactorizando hasta tener las pruebas correctas.
+
+
+CICLO:
+1. Se escribe la prueba, se verifica que la prueba falla.
+2. Desarrollar el código hasta que pasa satisfactoriamente.
+3. Refactorizar el código hasta que queda el código limpio.
+
+Próposito -> Crear un código limpio y a la vez funcional.
+
+Los requisitos son traducidos en pruebas las pruebas pasan y garantizan que el software cumple con los requisitos que se establecieron.
+
+
+Ejemplo:
+
+Primero tener un requisito (Definir exactamente que es lo que tenemos que hacer)
+Escribir prueba automatizada.
+Verificar que la prueba falla, no hay código adaptado a la prueba.
+Escribimos el código de la forma más sencilla para que la prueba de 'ok'.
+---Principio 'KISS'
+
+Keep it simple, stupid.
+(Hazlo simple)---
+
+Ejecutar las pruebas y verificar que estan correctas.
+Refactorizar, eliminar código duplicado o inservible.
+
 Test unitario -> prueban una unidad de código como por ejemplo un objeto o una función.
 
 Test de integración -> prueban la interacción de más de un componente.

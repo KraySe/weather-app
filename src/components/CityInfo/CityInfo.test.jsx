@@ -28,4 +28,6 @@ test("CityInfo render", async () => {
   // y cuando en el segundo elemento se encuentre el país Argentina
   expect(cityAndCountryComponents[0]).toHaveTextContent(city);
   expect(cityAndCountryComponents[1]).toHaveTextContent(country);
+
+  // si estas condiciones se cumplen (expect), el test esta 'ok'
 });

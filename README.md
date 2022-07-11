@@ -68,3 +68,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### TDD
+
+Test unitario -> prueban una unidad de código como por ejemplo un objeto o una función.
+
+Test de integración -> prueban la interacción de más de un componente.
+
+Test e2e -> Prueban todo el sistema funcionando.

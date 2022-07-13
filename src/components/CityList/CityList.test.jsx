@@ -27,8 +27,6 @@ test("CityList renders", async () => {
 });
 
 test("CityList click on item", async () => {
-  // Debemos simular una acción del usuario: click sobre un item
-  // Para eso vamos a utilizar una función "mock"
   const fnClickOnItem = jest.fn();
 
   const { findAllByRole } = render(
@@ -37,13 +35,7 @@ test("CityList click on item", async () => {
 
   const items = await findAllByRole("listitem");
 
-  // Ahora, para simular la acción vamos a utilizar fireEvent
-  // fireEvent es parte de la librearía de testing-library/react
-
   fireEvent.click(items[0]);
-
-  // ¿Ahora que sucede?
-  // Se debió llamar a la función fnClickOnItem UNA única vez
 
   expect(fnClickOnItem).toHaveBeenCalledTimes(1);
 });

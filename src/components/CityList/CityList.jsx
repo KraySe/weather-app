@@ -9,7 +9,7 @@ const renderCityAndCountry = (cityAndCoutry) => {
   return (
     <li>
       <CityInfo city={city} country={country} />
-      <Weather temperature={10} />
+      <Weather temperature={10} state="sunny" />
     </li>
   );
 };

@@ -10,10 +10,10 @@ const renderCityAndCountry = (cityAndCoutry) => {
   return (
     <li key={city}>
       <Grid container justifyItems={"center"} alignItems={"center"}>
-        <Grid item sm={8}>
+        <Grid item xs={12} md={8}>
           <CityInfo city={city} country={country} />
         </Grid>
-        <Grid item sm={4}>
+        <Grid item xs={12} md={4}>
           <Weather temperature={10} state="sunny" />
         </Grid>
       </Grid>

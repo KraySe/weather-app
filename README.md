@@ -69,17 +69,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
 ### TDD
 
 ¿Qué es TDD?
 
-Test Driven Development (Desarrollo guiado por pruebas) 
+Test Driven Development (Desarrollo guiado por pruebas)
 
 Primero escribir las pruebas y luego ir refactorizando hasta tener las pruebas correctas.
 
-
 CICLO:
+
 1. Se escribe la prueba, se verifica que la prueba falla.
 2. Desarrollar el código hasta que pasa satisfactoriamente.
 3. Refactorizar el código hasta que queda el código limpio.
@@ -87,7 +86,6 @@ CICLO:
 Próposito -> Crear un código limpio y a la vez funcional.
 
 Los requisitos son traducidos en pruebas las pruebas pasan y garantizan que el software cumple con los requisitos que se establecieron.
-
 
 Ejemplo:
 
@@ -109,7 +107,163 @@ Test de integración -> prueban la interacción de más de un componente.
 
 Test e2e -> Prueban todo el sistema funcionando.
 
-
 ### Proveedores de contexto ( Context.Provider )
 
+### Currying
 
+- Beneficios de la técnica
+
+--> Mejor estructura de código.
+--> Potente con Map.
+--> Más reutilización de funciones.
+--> Permite componer funciones.
+
+Clousure ejemplo:
+
+```javascript
+// step 1
+function start() {
+  var name = "Name";
+  function showName() {
+    // Clousure o clausura
+    alert(name);
+  }
+  showName();
+}
+
+function onClick(obj, e) {
+  start();
+}
+
+document.getElementById("app").innerHTML = `
+<h1>Clousure</h1>
+<div>
+    <button id="ok">Action</button>
+</div>
+`;
+
+document.getElementById("ok").addEventListener("click", onClick);
+```
+
+
+```javascript
+// step 2
+function start() {
+  var name = "Name";
+  function showName() {
+    // Clousure o clausura
+    alert(name);
+  }
+  return showName;
+}
+
+let startFn;
+
+function onClick(obj, e) {
+   startFn = start();
+}
+
+function onClickEject(obj, e) {
+    startFn();
+}
+
+document.getElementById("app").innerHTML = `
+<h1>Clousure</h1>
+<div>
+    <button id="ok">Action</button>
+    <button id="eject">Eject</button>
+</div>
+`;
+
+document.getElementById("ok").addEventListener("click", onClick);
+document.getElementById("eject").addEventListener("click", onClickEject);
+```
+
+
+```javascript
+// step 3
+function start(name) {
+  function showName() {
+    // Clousure o clausura
+    alert(name);
+  }
+  return showName;
+}
+
+let startFn;
+
+function onClick(obj, e) {
+   startFn = start("Name");
+}
+
+function onClickEject(obj, e) {
+    startFn();
+}
+
+document.getElementById("app").innerHTML = `
+<h1>Clousure</h1>
+<div>
+    <button id="ok">Action</button>
+    <button id="eject">Eject</button>
+</div>
+`;
+
+document.getElementById("ok").addEventListener("click", onClick);
+document.getElementById("eject").addEventListener("click", onClickEject);
+```
+
+Currying example
+
+```javascript
+// step 1
+function createSum(x) {
+    return function (y) {
+        return x + y;
+    }
+}
+
+var baseOne = createSum(1);
+
+var baseFive = createSum(5);
+
+console.log(baseOne(10)); // result: 11
+console.log(baseFive(10)); // result: 15
+```
+
+```javascript
+// step 2
+function createSum(x) {
+    return function (y) {
+        console.log("x + y", x + y);
+        return x + y;
+    }
+}
+
+var baseOne = createSum(1);
+
+var baseFive = createSum(5);
+
+var array = [1, 2, 3, 4, 5];
+
+array.map(n => baseOne(n)); // result: x + y -> 2, 3, 4, 5, 6
+array.map(n => baseFive(n)); // result: x + y -> 6, 7, 8, 9, 10
+```
+
+```javascript
+// step 3
+function log(date) {
+    return (priority) => (mensaje) => {
+        console.log(
+            `[${date.getHours()}:${date.getMinutes()}] [${priority}] ${mensaje}`
+        );
+    }
+}
+
+let logActual = log(new Date());
+
+let logInformation = logActual("Information");
+let logError = logActual("Error");
+
+logInformation("This is a test"); // [17:30] [Information] This is a test
+logError("Advanced course");  // [17:30] [Error] Advanced course
+```

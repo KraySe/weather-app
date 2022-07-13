@@ -1,13 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
-import { WiCloud } from 'react-icons/wi'
+import { WiCloud } from "react-icons/wi";
+import { IconContext } from "react-icons/lib";
 
 const Weather = ({ temperature }) => {
   return (
     <div>
-      <WiCloud></WiCloud>
-      <Typography display="inline"  variant="h2">{temperature}</Typography>
+      <IconContext.Provider value={{ size: "5em" }}>
+        <WiCloud style={{verticalAlign: "bottom"}}></WiCloud>
+      </IconContext.Provider>
+      <Typography display="inline" variant="h3">
+        {temperature}
+      </Typography>
     </div>
   );
 };

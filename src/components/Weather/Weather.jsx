@@ -15,12 +15,14 @@ const stateByName = {
   cloudy: WiDayCloudy,
   fog: WiDayFog,
   sunny: WiDaySunny,
-  rain: WiRain
-}
+  rain: WiRain,
+};
 
-const renderState = state => {
-  // TODO: implement function to render state by type
-}
+const renderState = (state) => {
+  const Icon = stateByName[state] && stateByName.sunny;
+
+  return <Icon />;
+};
 
 const Weather = ({ temperature }) => {
   return (

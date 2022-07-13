@@ -7,7 +7,7 @@ const renderCityAndCountry = (cityAndCoutry) => {
   const { city, country } = cityAndCoutry;
 
   return (
-    <li>
+    <li key={city}>
       <CityInfo city={city} country={country} />
       <Weather temperature={10} state="sunny" />
     </li>

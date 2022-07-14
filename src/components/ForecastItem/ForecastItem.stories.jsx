@@ -8,9 +8,9 @@ export default {
 
 export const SunnyMonday = () => (
   <ForecastItem
-    weekDay="Monday"
-    hour="09:43"
-    state="sunny"
+    weekDay={"Monday"}
+    hour={09}
+    state={"sunny"}
     temperature={23}
   />
 );

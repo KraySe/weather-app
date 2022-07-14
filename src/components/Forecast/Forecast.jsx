@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Grid } from "@mui/material";
 import ForecastItem from "./../ForecastItem";
+import { validValues } from "../IconState";
 
 const renderForecastItem = (forecast) => {
   const { weekDay, hour, state, temperature } = forecast;
@@ -26,7 +27,14 @@ const Forecast = ({ forecastItemList }) => {
 };
 
 Forecast.propTypes = {
-  forecastItemList: PropTypes.array.isRequired,
+  forecastItemList: PropTypes.arrayOf(
+    PropTypes.shape({
+      weekDay: PropTypes.string.isRequired,
+      hour: PropTypes.number.isRequired,
+      state: PropTypes.oneOf(validValues).isRequired,
+      temperature: PropTypes.number.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Forecast;

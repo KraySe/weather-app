@@ -1,10 +1,6 @@
 import React from "react";
 import Forecast from "./Forecast";
-
-export default {
-  title: "Forecast",
-  comoponent: Forecast,
-};
+import { render } from "@testing-library/react";
 
 const forecastItemList = [
   { hour: 18, state: "sunny", temperature: 17, weekDay: "Thursday" },
@@ -15,6 +11,12 @@ const forecastItemList = [
   { hour: 14, state: "rain", temperature: 17, weekDay: "Saturday" },
 ];
 
-export const ForecastExample = () => (
-  <Forecast forecastItemList={forecastItemList} />
-);
+test("Forecast render", async () => {
+  const { findAllByTestId } = render(
+    <Forecast forecastItemList={forecastItemList} />
+  );
+
+  const forecastItems = await findAllByTestId("forecast-item-container");
+
+  expect(forecastItems).toHaveLength(6);
+});

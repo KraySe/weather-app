@@ -1,12 +1,22 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-const App = props => {
+const App = (props) => {
   return (
-    <div>App</div>
-  )
-}
+    <div>
+      <h1>App</h1>
+      <Router>
+        <Switch>
+          <Route exact path={"/"}>
+            Welcome
+          </Route>
+          <Route path={"/main"}>Main</Route>
+          <Route path={"/city"}>City</Route>
+          <Route>Not Found</Route>
+        </Switch>
+      </Router>
+    </div>
+  );
+};
 
-App.propTypes = {}
-
-export default App
+export default App;

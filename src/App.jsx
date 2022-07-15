@@ -9,8 +9,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 const App = () => {
   return (
     <Grid container justifyContent={"center"} direction={"row"}>
-      <Grid item sm={10}>
-        <h1>App</h1>
+      <Grid item xs={12} sm={11} md={10} lg={8}>
         <Router>
           <Switch>
             <Route exact path={"/"}>

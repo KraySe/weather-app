@@ -3,7 +3,7 @@ import Forecast from "./Forecast";
 
 export default {
   title: "Forecast",
-  comoponent: Forecast,
+  component: Forecast,
 };
 
 const forecastItemList = [

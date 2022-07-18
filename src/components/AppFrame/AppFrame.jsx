@@ -12,7 +12,7 @@ import {
 import { IconContext } from "react-icons";
 import { WiDaySunny } from "react-icons/wi";
 
-const AppFrame = (props) => {
+const AppFrame = ({ children }) => {
   return (
     <Grid container justifyContent={"center"}>
       <AppBar position={"static"}>
@@ -35,15 +35,14 @@ const AppFrame = (props) => {
         </Toolbar>
       </AppBar>
       <Grid container item xs={12} sm={11} md={10} bg={8}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa
-        consequuntur dolores tenetur deserunt numquam vitae magnam molestias ea
-        et veritatis. Neque consequuntur iure voluptate nesciunt. Cumque totam
-        voluptates culpa iusto.
+        {children}
       </Grid>
     </Grid>
   );
 };
 
-AppFrame.propTypes = {};
+AppFrame.propTypes = {
+  children: PropTypes.node,
+};
 
 export default AppFrame;

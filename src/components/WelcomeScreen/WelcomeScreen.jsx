@@ -14,7 +14,7 @@ const WelcomeScreen = ({ children }) => {
       setVanta(1);
       console.log("set new value to vanta");
     }
-  });
+  }, [vanta]);
 
   return <div ref={myRefDiv}>WelcomeScreen</div>;
 };

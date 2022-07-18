@@ -267,3 +267,9 @@ let logError = logActual("Error");
 logInformation("This is a test"); // [17:30] [Information] This is a test
 logError("Advanced course");  // [17:30] [Error] Advanced course
 ```
+
+
+### API
+
+- BASE URL: 
+https://api.openweathermap.org/data/2.5/weather?q=London&appid=*****

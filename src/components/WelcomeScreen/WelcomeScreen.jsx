@@ -13,24 +13,25 @@ const WelcomeScreen = ({ children }) => {
     console.log("myRefDiv.current (useEffect)", myRefDiv.current);
 
     if (!vanta) {
-      setVanta(Clouds({
-        THREE,
-        el: myRefDiv.current,
-      }));
+      setVanta(
+        Clouds({
+          THREE,
+          el: myRefDiv.current,
+        })
+      );
 
       console.log("set new value to vanta");
     }
 
     return () => {
-        if(vanta) {
-            vanta.destroy();
-            console.log("clean resources");
-        }
-    }
-
+      if (vanta) {
+        vanta.destroy();
+        console.log("clean resources");
+      }
+    };
   }, [vanta]);
 
-  return <div ref={myRefDiv}>WelcomeScreen</div>;
+  return <div className={"full"} ref={myRefDiv}>{children}</div>;
 };
 
 WelcomeScreen.propTypes = {

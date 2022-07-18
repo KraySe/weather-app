@@ -40,9 +40,12 @@ const CityList = ({ cities, onClickCity }) => {
   useEffect(() => {
     const setWeather = (city) => {
       const appid = "8548ce8ec745e1ea8db3cfed3bcbadd6";
-      axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appid}`
-      );
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appid}`;
+      axios.get(url).then((response) => {
+        const { data } = response;
+        const temperature = data.main.temp;
+        const state = "sunny";
+      });
     };
 
     cities.forEach(({ city, country }) => {

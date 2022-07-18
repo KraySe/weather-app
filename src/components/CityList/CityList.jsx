@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { Grid, List, ListItem } from "@mui/material";
 import CityInfo from "../CityInfo";
 import Weather from "../Weather";
@@ -14,11 +15,11 @@ const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
           <CityInfo city={city} country={country} />
         </Grid>
         <Grid item xs={12} md={3}>
-          {
-            weather ?
-            <Weather temperature={weather.temperature} state={weather.state} /> :
-            ("data not found")
-          }
+          {weather ? (
+            <Weather temperature={weather.temperature} state={weather.state} />
+          ) : (
+            "data not found"
+          )}
         </Grid>
       </Grid>
     </ListItem>
@@ -36,7 +37,18 @@ const CityList = ({ cities, onClickCity }) => {
    */
   const [allWeather, setAllWeather] = useState({});
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const setWeather = (city) => {
+      const appid = "8548ce8ec745e1ea8db3cfed3bcbadd6";
+      axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appid}`
+      );
+    };
+
+    cities.forEach(({ city, country }) => {
+      setWeather(city);
+    });
+  }, [cities]);
 
   // const weather = { temperature: 10, state: "sunny" };
 

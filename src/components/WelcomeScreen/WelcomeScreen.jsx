@@ -20,6 +20,14 @@ const WelcomeScreen = ({ children }) => {
 
       console.log("set new value to vanta");
     }
+
+    return () => {
+        if(vanta) {
+            vanta.destroy();
+            console.log("clean resources");
+        }
+    }
+
   }, [vanta]);
 
   return <div ref={myRefDiv}>WelcomeScreen</div>;

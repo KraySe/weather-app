@@ -6,7 +6,6 @@ import Weather from "../Weather";
 
 const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
   const { city, country } = cityAndCoutry;
-  const { temperature, state } = weather;
 
   return (
     <ListItem button key={city} onClick={eventOnClickCity}>
@@ -15,7 +14,11 @@ const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
           <CityInfo city={city} country={country} />
         </Grid>
         <Grid item xs={12} md={3}>
-          <Weather temperature={temperature} state={state} />
+          {
+            weather ?
+            <Weather temperature={weather.temperature} state={weather.state} /> :
+            ("data not found")
+          }
         </Grid>
       </Grid>
     </ListItem>
@@ -23,11 +26,27 @@ const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
 };
 
 const CityList = ({ cities, onClickCity }) => {
-  const weather = { temperature: 10, state: "sunny" };
+  /**
+   * {
+   *    [Buenos Aires-Argentina] : { },
+   *    [Bogotá-Colombia] : { },
+   *    [Madrid-España] : { },
+   *    [Ciudad de México-Mexico] : { },
+   * }
+   */
+  const [allWeather, setAllWeather] = useState({});
+
+  useEffect(() => {}, []);
+
+  // const weather = { temperature: 10, state: "sunny" };
+
   return (
     <List>
       {cities.map((cityAndCoutry) =>
-        renderCityAndCountry(onClickCity)(cityAndCoutry, weather)
+        renderCityAndCountry(onClickCity)(
+          cityAndCoutry,
+          allWeather[`${cityAndCoutry.city}-${cityAndCoutry.country}`]
+        )
       )}
     </List>
   );

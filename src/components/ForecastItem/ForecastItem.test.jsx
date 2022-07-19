@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 
 test("ForecastItem render", async () => {
   const { findByText } = render(
-    <ForecastItem weekDay={"Monday"} hour={11} state="sunny" temperature={25} />
+    <ForecastItem weekDay={"Monday"} hour={11} state="clear" temperature={25} />
   );
 
   const weekDay = await findByText("Monday");

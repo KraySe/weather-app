@@ -7,19 +7,24 @@ const cities = [
   {
     city: "Badajoz",
     country: "España",
+    countryCode: "ES"
   },
   {
     city: "Cáceres",
     country: "España",
+    countryCode: "ES"
   },
   {
     city: "Barcelona",
     country: "España",
+    countryCode: "ES"
   },
 ];
 
 test("CityList renders", async () => {
-  const { findAllByRole } = render(<CityList cities={cities} />);
+  const { findAllByRole } = render(
+    <CityList cities={cities} onClickCity={() => {}} />
+  );
 
   const items = await findAllByRole("button");
 

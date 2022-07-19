@@ -36,20 +36,15 @@ const CityList = ({ cities, onClickCity }) => {
       axios.get(url).then((response) => {
         const { data } = response;
         const temperature = data.main.temp;
-        const state = "sunny";
+        const state = data.weather[0].main.toLowerCase();
 
         const propName = `${city}-${country}`;
         const propValue = { temperature, state };
 
-        setAllWeather((allWeather) => {
-          const result = {
-            ...allWeather,
-            [propName]: propValue,
-          };
-
-          console.log("allWeather [result]", result);
-          return result;
-        });
+        setAllWeather((allWeather) => ({
+          ...allWeather,
+          [propName]: propValue,
+        }));
       });
     };
 
@@ -75,7 +70,7 @@ CityList.propTypes = {
     PropTypes.shape({
       city: PropTypes.string.isRequired,
       country: PropTypes.string.isRequired,
-      countryCode: PropTypes.string.isRequired
+      countryCode: PropTypes.string.isRequired,
     })
   ).isRequired,
   onClickCity: PropTypes.func.isRequired,

@@ -27,33 +27,36 @@ const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
 };
 
 const CityList = ({ cities, onClickCity }) => {
-  /**
-   * {
-   *    [Buenos Aires-Argentina] : { },
-   *    [Bogotá-Colombia] : { },
-   *    [Madrid-España] : { },
-   *    [Ciudad de México-Mexico] : { },
-   * }
-   */
   const [allWeather, setAllWeather] = useState({});
 
   useEffect(() => {
-    const setWeather = (city) => {
+    const setWeather = (city, country) => {
       const appid = "8548ce8ec745e1ea8db3cfed3bcbadd6";
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appid}`;
       axios.get(url).then((response) => {
         const { data } = response;
         const temperature = data.main.temp;
         const state = "sunny";
+
+        const propName = `${city}-${country}`;
+        const propValue = { temperature, state };
+
+        setAllWeather((allWeather) => {
+          const result = {
+            ...allWeather,
+            [propName]: propValue,
+          };
+
+          console.log("allWeather [result]", result);
+          return result;
+        });
       });
     };
 
     cities.forEach(({ city, country }) => {
-      setWeather(city);
+      setWeather(city, country);
     });
   }, [cities]);
-
-  // const weather = { temperature: 10, state: "sunny" };
 
   return (
     <List>

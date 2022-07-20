@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import convertUnits from "convert-units";
-import { Grid, List, ListItem } from "@mui/material";
+import { Grid, List, ListItem, Alert } from "@mui/material";
 import CityInfo from "../CityInfo";
 import Weather from "../Weather";
 
@@ -28,6 +28,7 @@ const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
 
 const CityList = ({ cities, onClickCity }) => {
   const [allWeather, setAllWeather] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const setWeather = (city, country, countryCode) => {
@@ -51,15 +52,13 @@ const CityList = ({ cities, onClickCity }) => {
           }));
         })
         .catch((error) => {
-          if(error.response) {
-            const {data, status} = error.response;
-
-            console.log("data", data);
-            console.log("status", status);
-          } else if(error.request) {
-            console.log("server in-accesible, no internt"); 
+          if (error.response) {
+            const { data, status } = error.response;
+            setError("ups!! it seems that an error has occurred");
+          } else if (error.request) {
+            setError("ups!! check your internet connection");
           } else {
-            console.log("error");
+            setError("ups!! problem loading data");
           }
         });
     };
@@ -70,14 +69,21 @@ const CityList = ({ cities, onClickCity }) => {
   }, [cities]);
 
   return (
-    <List>
-      {cities.map((cityAndCoutry) =>
-        renderCityAndCountry(onClickCity)(
-          cityAndCoutry,
-          allWeather[`${cityAndCoutry.city}-${cityAndCoutry.country}`]
-        )
+    <>
+      {error && (
+        <Alert onClose={() => setError(null)} severity={"error"}>
+          {error}
+        </Alert>
       )}
-    </List>
+      <List>
+        {cities.map((cityAndCoutry) =>
+          renderCityAndCountry(onClickCity)(
+            cityAndCoutry,
+            allWeather[`${cityAndCoutry.city}-${cityAndCoutry.country}`]
+          )
+        )}
+      </List>
+    </>
   );
 };
 

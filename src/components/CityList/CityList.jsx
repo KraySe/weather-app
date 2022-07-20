@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import convertUnits from "convert-units";
 import { Grid, List, ListItem } from "@mui/material";
 import CityInfo from "../CityInfo";
 import Weather from "../Weather";
@@ -35,7 +36,7 @@ const CityList = ({ cities, onClickCity }) => {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${appid}`;
       axios.get(url).then((response) => {
         const { data } = response;
-        const temperature = data.main.temp;
+        const temperature = Number(convertUnits(data.main.temp).from("K").to("C").toFixed(0));
         const state = data.weather[0].main.toLowerCase();
 
         const propName = `${city}-${country}`;

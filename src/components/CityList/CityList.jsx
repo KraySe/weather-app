@@ -16,11 +16,10 @@ const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
           <CityInfo city={city} country={country} />
         </Grid>
         <Grid item xs={12} md={3}>
-          {weather ? (
-            <Weather temperature={weather.temperature} state={weather.state} />
-          ) : (
-            "data not found"
-          )}
+          <Weather
+            temperature={weather && weather.temperature}
+            state={weather && weather.state}
+          />
         </Grid>
       </Grid>
     </ListItem>
@@ -36,7 +35,9 @@ const CityList = ({ cities, onClickCity }) => {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${appid}`;
       axios.get(url).then((response) => {
         const { data } = response;
-        const temperature = Number(convertUnits(data.main.temp).from("K").to("C").toFixed(0));
+        const temperature = Number(
+          convertUnits(data.main.temp).from("K").to("C").toFixed(0)
+        );
         const state = data.weather[0].main.toLowerCase();
 
         const propName = `${city}-${country}`;

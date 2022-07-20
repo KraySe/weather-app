@@ -33,21 +33,35 @@ const CityList = ({ cities, onClickCity }) => {
     const setWeather = (city, country, countryCode) => {
       const appid = "8548ce8ec745e1ea8db3cfed3bcbadd6";
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${appid}`;
-      axios.get(url).then((response) => {
-        const { data } = response;
-        const temperature = Number(
-          convertUnits(data.main.temp).from("K").to("C").toFixed(0)
-        );
-        const state = data.weather[0].main.toLowerCase();
+      axios
+        .get(url)
+        .then((response) => {
+          const { data } = response;
+          const temperature = Number(
+            convertUnits(data.main.temp).from("K").to("C").toFixed(0)
+          );
+          const state = data.weather[0].main.toLowerCase();
 
-        const propName = `${city}-${country}`;
-        const propValue = { temperature, state };
+          const propName = `${city}-${country}`;
+          const propValue = { temperature, state };
 
-        setAllWeather((allWeather) => ({
-          ...allWeather,
-          [propName]: propValue,
-        }));
-      });
+          setAllWeather((allWeather) => ({
+            ...allWeather,
+            [propName]: propValue,
+          }));
+        })
+        .catch((error) => {
+          if(error.response) {
+            const {data, status} = error.response;
+
+            console.log("data", data);
+            console.log("status", status);
+          } else if(error.request) {
+            console.log("server in-accesible, no internt"); 
+          } else {
+            console.log("error");
+          }
+        });
     };
 
     cities.forEach(({ city, country, countryCode }) => {

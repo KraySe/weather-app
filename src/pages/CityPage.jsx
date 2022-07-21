@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { Grid } from "@mui/material";
 import AppFrame from "../components/AppFrame";
 import CityInfo from "./../components/CityInfo";
@@ -26,6 +27,10 @@ const forecastItemListExample = [
 ];
 
 const CityPage = () => {
+
+  const params = useParams();
+  console.log(params);
+
   const city = "Badajoz";
   const country = "España";
   const state = "clouds";

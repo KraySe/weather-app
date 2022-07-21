@@ -19,6 +19,10 @@ class ErrorBoundary extends React.Component {
     });
   };
 
+  componentDidMount() { 
+    console.log('The component has been mounted');
+   }
+
   render() {
     return (
       <div>

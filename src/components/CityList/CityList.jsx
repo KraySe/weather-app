@@ -6,14 +6,17 @@ import { Grid, List, ListItem, Alert } from "@mui/material";
 import CityInfo from "../CityInfo";
 import Weather from "../Weather";
 
-
 const getCityCode = (city, countryCode) => `${city}-${countryCode}`;
 
 const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
   const { city, country, countryCode } = cityAndCoutry;
 
   return (
-    <ListItem button key={getCityCode(city, countryCode)} onClick={eventOnClickCity}>
+    <ListItem
+      button
+      key={getCityCode(city, countryCode)}
+      onClick={() => eventOnClickCity(city, countryCode)}
+    >
       <Grid container justifyItems={"center"} alignItems={"center"}>
         <Grid item xs={12} md={9}>
           <CityInfo city={city} country={country} />
@@ -80,7 +83,9 @@ const CityList = ({ cities, onClickCity }) => {
         {cities.map((cityAndCoutry) =>
           renderCityAndCountry(onClickCity)(
             cityAndCoutry,
-            allWeather[getCityCode(cityAndCoutry.city, cityAndCoutry.countryCode)]
+            allWeather[
+              getCityCode(cityAndCoutry.city, cityAndCoutry.countryCode)
+            ]
           )
         )}
       </List>

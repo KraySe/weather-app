@@ -1,8 +1,16 @@
 import React from "react";
 
 class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      active: false,
+    };
+  }
+
   isActive = () => {
-    return this.props.active ? "Active" : "Inactive";
+    return this.state.active ? "Active" : "Inactive";
   };
 
   render() {

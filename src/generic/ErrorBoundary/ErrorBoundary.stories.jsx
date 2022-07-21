@@ -7,5 +7,5 @@ export default {
 };
 
 export const ErrorBoundaryExample = () => (
-  <ErrorBoundary greeting={"Hello"} active={true} />
+  <ErrorBoundary greeting={"Hello"} />
 );

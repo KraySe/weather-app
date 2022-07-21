@@ -29,6 +29,10 @@ class ErrorBoundary extends React.Component {
     console.log("The component has been updated");
   }
 
+  componentWillUnmount() {
+    console.log("The component has been Unmounted");
+   }
+
   render() {
     return (
       <div>

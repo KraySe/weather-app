@@ -8,6 +8,7 @@ import Weather from "./../components/Weather";
 import WeatherDetails from "./../components/WeatherDetails";
 import ForecastChart from "./../components/ForecastChart";
 import Forecast from "./../components/Forecast";
+import moment from "moment";
 
 const dataExample = [
   { dayHour: "Jue 18", min: 14, max: 22 },
@@ -41,7 +42,17 @@ const CityPage = () => {
         const { data } = await axios.get(url);
         console.log(data);
 
-        setData(dataExample);
+        const daysAhead = [0, 1, 2, 3, 4, 5];
+        const days = daysAhead.map((d) => moment().add(d, "d"));
+        const dataAux = days.map((d) => {
+          return {
+            dayHour: d.format("ddd"),
+            min: 20,
+            max: 40,
+          };
+        });
+
+        setData(dataAux);
         setForecastItemList(forecastItemListExample);
       } catch (error) {
         console.log(error);

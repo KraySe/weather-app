@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import moment from "moment";
+import "moment/locale/es";
+import convertUnits from "convert-units";
 import { Grid } from "@mui/material";
 import AppFrame from "../components/AppFrame";
 import CityInfo from "./../components/CityInfo";
@@ -8,8 +11,6 @@ import Weather from "./../components/Weather";
 import WeatherDetails from "./../components/WeatherDetails";
 import ForecastChart from "./../components/ForecastChart";
 import Forecast from "./../components/Forecast";
-import moment from "moment";
-import "moment/locale/es";
 
 const dataExample = [
   { dayHour: "Jue 18", min: 14, max: 22 },
@@ -41,15 +42,22 @@ const CityPage = () => {
 
       try {
         const { data } = await axios.get(url);
-        console.log(data);
-
         const daysAhead = [0, 1, 2, 3, 4, 5];
         const days = daysAhead.map((d) => moment().add(d, "d"));
-        const dataAux = days.map((d) => {
+        const dataAux = days.map((day) => {
+          const tempObjArray = data.list.filter((item) => {
+            const dayOfYear = moment.unix(item.dt).dayOfYear();
+
+            return dayOfYear === day.dayOfYear();
+          });
+          const temps = tempObjArray.map((item) => item.main.temp);
+          const toCelsius = (temp) =>
+            Number(convertUnits(temp).from("K").to("C").toFixed(0));
+
           return {
-            dayHour: d.format("ddd"),
-            min: 20,
-            max: 40,
+            dayHour: day.format("ddd"),
+            min: toCelsius(Math.min(...temps)),
+            max: toCelsius(Math.max(...temps)),
           };
         });
 

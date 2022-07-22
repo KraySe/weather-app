@@ -9,6 +9,7 @@ import WeatherDetails from "./../components/WeatherDetails";
 import ForecastChart from "./../components/ForecastChart";
 import Forecast from "./../components/Forecast";
 import moment from "moment";
+import "moment/locale/es";
 
 const dataExample = [
   { dayHour: "Jue 18", min: 14, max: 22 },

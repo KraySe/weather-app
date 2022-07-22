@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import { Grid } from "@mui/material";
 import AppFrame from "../components/AppFrame";
 import CityInfo from "./../components/CityInfo";
@@ -29,14 +30,27 @@ const forecastItemListExample = [
 const CityPage = () => {
   const [data, setData] = useState(null);
   const [forecastItemList, setForecastItemList] = useState(null);
-  const params = useParams();
+  const { city, countryCode } = useParams();
 
   useEffect(() => {
-    setData(dataExample);
-    setForecastItemList(forecastItemListExample);
-  }, []);
+    const getForecast = async () => {
+      const appid = "8548ce8ec745e1ea8db3cfed3bcbadd6";
+      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city},${countryCode}&appid=${appid}`;
 
-  const city = "Badajoz";
+      try {
+        const { data } = await axios.get(url);
+        console.log(data);
+
+        setData(dataExample);
+        setForecastItemList(forecastItemListExample);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getForecast();
+  }, [city, countryCode]);
+
   const country = "España";
   const state = "clouds";
   const temperature = 20;

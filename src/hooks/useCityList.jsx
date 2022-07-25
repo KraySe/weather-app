@@ -11,9 +11,9 @@ const useCityList = (cities) => {
   useEffect(() => {
     const setWeather = async (city, countryCode) => {
       const url = getWeatherUrl({ city, countryCode });
-      const response = await axios.get(url);
 
       try {
+        const response = await axios.get(url);
         const { data } = response;
         const temperature = Number(
           convertUnits(data.main.temp).from("K").to("C").toFixed(0)

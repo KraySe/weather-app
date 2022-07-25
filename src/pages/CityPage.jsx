@@ -42,6 +42,8 @@ const CityPage = () => {
 
       try {
         const { data } = await axios.get(url);
+        const toCelsius = (temp) =>
+          Number(convertUnits(temp).from("K").to("C").toFixed(0));
         const daysAhead = [0, 1, 2, 3, 4, 5];
         const days = daysAhead.map((d) => moment().add(d, "d"));
         const dataAux = days.map((day) => {
@@ -51,8 +53,6 @@ const CityPage = () => {
             return dayOfYear === day.dayOfYear();
           });
           const temps = tempObjArray.map((item) => item.main.temp);
-          const toCelsius = (temp) =>
-            Number(convertUnits(temp).from("K").to("C").toFixed(0));
 
           return {
             dayHour: day.format("ddd"),
@@ -62,7 +62,19 @@ const CityPage = () => {
         });
 
         setData(dataAux);
-        setForecastItemList(forecastItemListExample);
+
+        const interval = [4, 8, 12, 16, 24];
+        const forecastItemListAux = data.list
+          .filter((item, index) => interval.includes(index))
+          .map((item) => {
+            return {
+              hour: moment.unix(item.dt).hour(),
+              weekDay: moment.unix(item.dt).format("dddd"),
+              state: item.weather[0].main.toLowerCase(),
+              temperature: toCelsius(item.main.temp),
+            };
+          });
+        setForecastItemList(forecastItemListAux);
       } catch (error) {
         console.log(error);
       }

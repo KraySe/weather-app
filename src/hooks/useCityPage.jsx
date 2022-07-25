@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
-import convertUnits from "convert-units";
 import { getForecastUrl } from "../utils/urls";
+import { toCelsius } from "../utils/utils";
 
 const useCityPage = () => {
   const [chartData, setChartData] = useState(null);
@@ -16,8 +16,6 @@ const useCityPage = () => {
 
       try {
         const { data } = await axios.get(url);
-        const toCelsius = (temp) =>
-          Number(convertUnits(temp).from("K").to("C").toFixed(0));
         const daysAhead = [0, 1, 2, 3, 4, 5];
         const days = daysAhead.map((d) => moment().add(d, "d"));
         const dataAux = days

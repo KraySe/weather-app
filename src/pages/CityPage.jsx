@@ -9,10 +9,8 @@ import ForecastChart from "./../components/ForecastChart";
 import Forecast from "./../components/Forecast";
 import useCityPage from "../hooks/useCityPage";
 
-
-
 const CityPage = () => {
- const { city, chartData, forecastItemList} = useCityPage()
+  const { city, chartData, forecastItemList } = useCityPage();
 
   const country = "España";
   const state = "clouds";

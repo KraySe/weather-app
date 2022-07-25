@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import convertUnits from "convert-units";
 import { getCityCode } from "../utils/utils";
+import { getWeatherUrl } from "../utils/urls";
 
 const useCityList = (cities) => {
   const [allWeather, setAllWeather] = useState({});
@@ -9,8 +10,7 @@ const useCityList = (cities) => {
 
   useEffect(() => {
     const setWeather = async (city, countryCode) => {
-      const appid = "8548ce8ec745e1ea8db3cfed3bcbadd6";
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${countryCode}&appid=${appid}`;
+      const url = getWeatherUrl({ city, countryCode });
       const response = await axios.get(url);
 
       try {

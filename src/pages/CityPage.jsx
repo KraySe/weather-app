@@ -40,8 +40,9 @@ const useCityPage = () => {
             dayHour: day.format("ddd"),
             min: toCelsius(Math.min(...temps)),
             max: toCelsius(Math.max(...temps)),
+            hasTemps: (temps.length > 0 ? true : false)
           };
-        });
+        }).filter(item => item.hasTemps);
 
         setChartData(dataAux);
 

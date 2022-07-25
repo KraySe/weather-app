@@ -12,26 +12,8 @@ import WeatherDetails from "./../components/WeatherDetails";
 import ForecastChart from "./../components/ForecastChart";
 import Forecast from "./../components/Forecast";
 
-const dataExample = [
-  { dayHour: "Jue 18", min: 14, max: 22 },
-  { dayHour: "Vie 06", min: 18, max: 27 },
-  { dayHour: "Vie 12", min: 18, max: 28 },
-  { dayHour: "Vie 18", min: 18, max: 25 },
-  { dayHour: "Sab 06", min: 15, max: 22 },
-  { dayHour: "Sab 12", min: 12, max: 19 },
-];
-
-const forecastItemListExample = [
-  { hour: 18, state: "clear", temperature: 17, weekDay: "Thursday" },
-  { hour: 6, state: "clouds", temperature: 18, weekDay: "Friday" },
-  { hour: 12, state: "drizzle", temperature: 18, weekDay: "Friday" },
-  { hour: 16, state: "clouds", temperature: 19, weekDay: "Friday" },
-  { hour: 14, state: "rain", temperature: 17, weekDay: "Saturday" },
-  { hour: 19, state: "rain", temperature: 17, weekDay: "Saturday" },
-];
-
-const CityPage = () => {
-  const [data, setData] = useState(null);
+const useCityPage = () => {
+  const [chartData, setChartData] = useState(null);
   const [forecastItemList, setForecastItemList] = useState(null);
   const { city, countryCode } = useParams();
 
@@ -61,7 +43,7 @@ const CityPage = () => {
           };
         });
 
-        setData(dataAux);
+        setChartData(dataAux);
 
         const interval = [4, 8, 12, 16, 24];
         const forecastItemListAux = data.list
@@ -82,6 +64,12 @@ const CityPage = () => {
 
     getForecast();
   }, [city, countryCode]);
+
+  return { city, chartData, forecastItemList};
+}
+
+const CityPage = () => {
+ const { city, chartData, forecastItemList} = useCityPage()
 
   const country = "España";
   const state = "clouds";
@@ -110,7 +98,7 @@ const CityPage = () => {
           <Weather state={state} temperature={temperature} />
           <WeatherDetails humidity={humidity} wind={wind} />
         </Grid>
-        <Grid item>{data && <ForecastChart data={data} />}</Grid>
+        <Grid item>{chartData && <ForecastChart data={chartData} />}</Grid>
         <Grid item>
           {forecastItemList && <Forecast forecastItemList={forecastItemList} />}
         </Grid>

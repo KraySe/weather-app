@@ -1,8 +1,7 @@
 import { validValues } from "../../components/IconState";
 import { getCityCode, toCelsius } from "../utils";
 
-const getAllWeather = (response, city, countryCode) => {
-  const { data } = response;
+const getAllWeather = (data, city, countryCode) => {
   const temperature = toCelsius(data.main.temp);
   const stateFromServer = data.weather[0].main.toLowerCase();
 

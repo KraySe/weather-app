@@ -12,9 +12,9 @@ const useCityList = (cities) => {
       const url = getWeatherUrl({ city, countryCode });
 
       try {
-        const response = await axios.get(url);
+        const { data } = await axios.get(url);
 
-        const allWeatherAux = getAllWeather(response, city, countryCode);
+        const allWeatherAux = getAllWeather(data, city, countryCode);
 
         setAllWeather((allWeather) => ({
           ...allWeather,

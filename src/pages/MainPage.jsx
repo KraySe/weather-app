@@ -3,31 +3,16 @@ import { useHistory } from "react-router-dom";
 import { Paper } from "@mui/material";
 import AppFrame from "./../components/AppFrame";
 import CityList from "./../components/CityList";
-
-const cities = [
-  {
-    city: "Badajoz",
-    country: "España",
-    countryCode: "ES"
-  },
-  {
-    city: "Cáceres",
-    country: "España",
-    countryCode: "ES"
-  },
-  {
-    city: "Barcelona",
-    country: "España",
-    countryCode: "ES"
-  },
-];
+import { getCities } from "../utils/cities.service";
 
 const MainPage = () => {
   const history = useHistory();
+  const cities = getCities();
 
   const onClickHandler = (city, countryCode) => {
     history.push(`/city/${countryCode}/${city}`);
   };
+  
   return (
     <AppFrame>
       <Paper elevation={3}>

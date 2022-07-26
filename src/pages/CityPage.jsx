@@ -1,6 +1,6 @@
 import React from "react";
 import "moment/locale/es";
-import { Grid } from "@mui/material";
+import { Grid, LinearProgress } from "@mui/material";
 import AppFrame from "../components/AppFrame";
 import CityInfo from "./../components/CityInfo";
 import Weather from "./../components/Weather";
@@ -38,6 +38,11 @@ const CityPage = () => {
         <Grid container item xs={12} justifyContent={"center"}>
           <Weather state={state} temperature={temperature} />
           <WeatherDetails humidity={humidity} wind={wind} />
+        </Grid>
+        <Grid item>
+          {
+            !chartData && !forecastItemList && <LinearProgress />
+          }
         </Grid>
         <Grid item>{chartData && <ForecastChart data={chartData} />}</Grid>
         <Grid item>

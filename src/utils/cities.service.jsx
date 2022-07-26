@@ -1,4 +1,4 @@
- const cities = [
+const cities = [
   {
     city: "Badajoz",
     country: "España",
@@ -16,4 +16,7 @@
   },
 ];
 
-export const getCities  = () => (cities);
+export const getCities = () => cities;
+
+export const getCountryNameByCountryCode = (countryCode) =>
+  cities.filter((c) => c.countryCode === countryCode)[0].country;

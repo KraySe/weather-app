@@ -4,6 +4,7 @@ import axios from "axios";
 import moment from "moment";
 import { getForecastUrl } from "../utils/urls";
 import { toCelsius } from "../utils/utils";
+import getChartData from "../utils/transform/getChartData";
 
 const useCityPage = () => {
   const [chartData, setChartData] = useState(null);
@@ -16,25 +17,8 @@ const useCityPage = () => {
 
       try {
         const { data } = await axios.get(url);
-        const daysAhead = [0, 1, 2, 3, 4, 5];
-        const days = daysAhead.map((d) => moment().add(d, "d"));
-        const dataAux = days
-          .map((day) => {
-            const tempObjArray = data.list.filter((item) => {
-              const dayOfYear = moment.unix(item.dt).dayOfYear();
 
-              return dayOfYear === day.dayOfYear();
-            });
-            const temps = tempObjArray.map((item) => item.main.temp);
-
-            return {
-              dayHour: day.format("ddd"),
-              min: toCelsius(Math.min(...temps)),
-              max: toCelsius(Math.max(...temps)),
-              hasTemps: temps.length > 0 ? true : false,
-            };
-          })
-          .filter((item) => item.hasTemps);
+        const dataAux = getChartData(data);
 
         setChartData(dataAux);
 

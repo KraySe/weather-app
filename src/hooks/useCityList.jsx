@@ -12,8 +12,10 @@ const useCityList = (cities, allWeather, onSetAllWeather) => {
       const url = getWeatherUrl({ city, countryCode });
 
       try {
-        const { data } = await axios.get(url);
+        const propName = getCityCode(city, countryCode);
+        onSetAllWeather({ [propName]: {} });
 
+        const { data } = await axios.get(url);
         const allWeatherAux = getAllWeather(data, city, countryCode);
 
         onSetAllWeather(allWeatherAux);

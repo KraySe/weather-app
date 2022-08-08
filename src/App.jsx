@@ -7,14 +7,28 @@ import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   const [allWeather, setAllWeather] = useState({});
-  const [chartData, onSetChartData] = useState(null);
-  const [forecastItemList, onSetForecastItemList] = useState(null);
+  const [allChartData, setAllChartData] = useState({});
+  const [allForecastItemList, setAllForecastItemList] = useState({});
 
   const onSetAllWeather = useCallback(
     (weatherCity) => {
       setAllWeather((allWeather) => ({ ...allWeather, ...weatherCity }));
     },
     [setAllWeather]
+  );
+
+  const onSetChartData = useCallback(
+    (charDataCity) => {
+      setAllChartData((chartData) => ({ ...chartData, ...charDataCity }));
+    },
+    [setAllChartData]
+  );
+
+  const onSetForecastItemList = useCallback(
+    (forecastItemListCity) => {
+      setAllForecastItemList((forecastItemList) => ({ ...forecastItemList, ...forecastItemListCity }));
+    },
+    [setAllForecastItemList]
   );
 
   const actions = useMemo(
@@ -29,10 +43,10 @@ const App = () => {
   const data = useMemo(
     () => ({
       allWeather,
-      chartData,
-      forecastItemList,
+      allChartData,
+      allForecastItemList,
     }),
-    [allWeather, chartData, forecastItemList]
+    [allWeather, allChartData, allForecastItemList]
   );
 
   return (

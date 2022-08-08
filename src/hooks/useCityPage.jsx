@@ -1,4 +1,4 @@
-import { useEffect, useState, useDebugValue } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { getForecastUrl } from "../utils/urls";

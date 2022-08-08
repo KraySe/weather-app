@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useCallback } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage";
 import MainPage from "./pages/MainPage";
@@ -8,8 +8,8 @@ import NotFoundPage from "./pages/NotFoundPage";
 const App = () => {
   const [allWeather, setAllWeather] = useState({});
 
-  const onSetAllWeather = useMemo(
-    () => (weatherCity) => {
+  const onSetAllWeather = useCallback(
+    (weatherCity) => {
       setAllWeather((allWeather) => ({ ...allWeather, ...weatherCity }));
     },
     [setAllWeather]

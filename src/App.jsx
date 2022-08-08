@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage";
 import MainPage from "./pages/MainPage";
@@ -15,6 +15,18 @@ const App = () => {
     [setAllWeather]
   );
 
+  const actions = useMemo(() => (
+    {
+      onSetAllWeather
+    }
+  ), [onSetAllWeather]);
+
+  const data = useMemo(() => (
+    {
+      allWeather
+    }
+  ), [allWeather]);
+
   return (
     <Router>
       <Switch>
@@ -22,10 +34,10 @@ const App = () => {
           <WelcomePage />
         </Route>
         <Route path={"/main"}>
-          <MainPage allWeather={allWeather} onSetAllWeather={onSetAllWeather} />
+          <MainPage data={data} actions={actions} />
         </Route>
         <Route path={"/city/:countryCode/:city"}>
-          <CityPage allWeather={allWeather} onSetAllWeather={onSetAllWeather} />
+          <CityPage data={data} actions={actions} />
         </Route>
         <Route>
           <NotFoundPage />

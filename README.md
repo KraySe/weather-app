@@ -272,4 +272,20 @@ logError("Advanced course");  // [17:30] [Error] Advanced course
 ### API
 
 - BASE URL: 
-https://api.openweathermap.org/data/2.5/weather?q=London&appid=*****
+´https://api.openweathermap.org/data/2.5/weather?q=London&appid=*****`
+
+
+
+conceptos:
+
+React.memo
+
+ - Shallow compare o comparación superficial.
+
+    La comparación superficial es cuando las propiedades de los objetos que se comparan se realizan utilizando "===" o igualdad estricta y no comparaciones más profundas en las propiedades.
+
+          
+
+Inspección exhaustiva
+
+https://es.reactjs.org/docs/profiler.html

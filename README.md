@@ -145,7 +145,6 @@ document.getElementById("app").innerHTML = `
 document.getElementById("ok").addEventListener("click", onClick);
 ```
 
-
 ```javascript
 // step 2
 function start() {
@@ -178,7 +177,6 @@ document.getElementById("app").innerHTML = `
 document.getElementById("ok").addEventListener("click", onClick);
 document.getElementById("eject").addEventListener("click", onClickEject);
 ```
-
 
 ```javascript
 // step 3
@@ -268,24 +266,18 @@ logInformation("This is a test"); // [17:30] [Information] This is a test
 logError("Advanced course");  // [17:30] [Error] Advanced course
 ```
 
-
 ### API
 
-- BASE URL: 
-´https://api.openweathermap.org/data/2.5/weather?q=London&appid=*****`
+[API](https://api.openweathermap.org/data/2.5/weather?q=London&appid=****)
 
-
-
-conceptos:
+## conceptos
 
 React.memo
 
- - Shallow compare o comparación superficial.
+- Shallow compare o comparación superficial.
 
     La comparación superficial es cuando las propiedades de los objetos que se comparan se realizan utilizando "===" o igualdad estricta y no comparaciones más profundas en las propiedades.
 
-          
-
 Inspección exhaustiva
 
-https://es.reactjs.org/docs/profiler.html
+<https://es.reactjs.org/docs/profiler.html>

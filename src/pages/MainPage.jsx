@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { Paper } from "@mui/material";
 import AppFrame from "./../components/AppFrame";
@@ -9,9 +9,9 @@ const MainPage = ({ data, actions }) => {
   const history = useHistory();
   const cities = getCities();
 
-  const onClickHandler = (city, countryCode) => {
+  const onClickHandler = useCallback((city, countryCode) => {
     history.push(`/city/${countryCode}/${city}`);
-  };
+  }, [history]);
 
   return (
     <AppFrame>

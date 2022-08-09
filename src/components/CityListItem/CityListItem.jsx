@@ -10,7 +10,7 @@ const CityListItem = ({city, countryCode, country, weather, eventOnClickCity}) =
       button
       onClick={() => eventOnClickCity(city, countryCode)}
     >
-      <Grid container justifyItems={"center"} alignItems={"center"}>
+      <Grid container direction={"column"} justifyContent={"center"} alignItems={"center"}>
         <Grid item xs={12} md={9}>
           <CityInfo city={city} country={country} />
         </Grid>

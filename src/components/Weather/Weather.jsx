@@ -9,7 +9,7 @@ const Weather = ({ temperature, state }) => {
 
   return (
     <Grid
-      containers
+      container
       item
       direction={"row"}
       justifyContent={"center"}

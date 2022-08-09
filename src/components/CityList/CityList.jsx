@@ -4,6 +4,8 @@ import { List, Alert } from "@mui/material";
 import useCityList from "../../hooks/useCityList";
 import { getCityCode } from "../../utils/utils";
 import CityListItem from "../CityListItem";
+import useWeatherDispatchContext from "../../hooks/useWeatherDispatchContext";
+import useWeatherStateContext from "../../hooks/useWeatherStateContext";
 
 const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
   const { city, countryCode } = cityAndCoutry;
@@ -18,7 +20,9 @@ const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
   );
 };
 
-const CityList = ({ cities, onClickCity, data, actions }) => {
+const CityList = ({ cities, onClickCity }) => {
+  const actions = useWeatherDispatchContext();
+  const data = useWeatherStateContext();
   const { allWeather } = data;
   const { error, setError } = useCityList(cities, allWeather, actions);
   return (

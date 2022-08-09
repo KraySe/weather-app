@@ -1,38 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Grid, List, ListItem, Alert } from "@mui/material";
-import CityInfo from "../CityInfo";
-import Weather from "../Weather";
+import { List, Alert } from "@mui/material";
 import useCityList from "../../hooks/useCityList";
 import { getCityCode } from "../../utils/utils";
+import CityListItem from "../CityListItem";
 
 const renderCityAndCountry = (eventOnClickCity) => (cityAndCoutry, weather) => {
-  const { city, country, countryCode } = cityAndCoutry;
+  const { city, countryCode } = cityAndCoutry;
 
   return (
-    <ListItem
-      button
+    <CityListItem
       key={getCityCode(city, countryCode)}
-      onClick={() => eventOnClickCity(city, countryCode)}
-    >
-      <Grid container justifyItems={"center"} alignItems={"center"}>
-        <Grid item xs={12} md={9}>
-          <CityInfo city={city} country={country} />
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <Weather
-            temperature={weather && weather.temperature}
-            state={weather && weather.state}
-          />
-        </Grid>
-      </Grid>
-    </ListItem>
+      eventOnClickCity={eventOnClickCity}
+      weather={weather}
+      {...cityAndCoutry}
+    />
   );
 };
 
 const CityList = ({ cities, onClickCity, data, actions }) => {
   const { allWeather } = data;
-  // const { onSetAllWeather } = actions;
   const { error, setError } = useCityList(cities, allWeather, actions);
   return (
     <>
@@ -66,4 +53,4 @@ CityList.propTypes = {
   onClickCity: PropTypes.func.isRequired,
 };
 
-export default CityList;
+export default React.memo(CityList);

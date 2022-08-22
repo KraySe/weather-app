@@ -1,17 +1,17 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Paper } from "@mui/material";
 import AppFrame from "./../components/AppFrame";
 import CityList from "./../components/CityList";
 import { getCities } from "../utils/cities.service";
 
-const MainPage = ({ data, actions }) => {
-  const history = useHistory();
+const MainPage = () => {
+  const navigate = useNavigate();
   const cities = getCities();
 
-  const onClickHandler = (city, countryCode) => {
-    history.push(`/city/${countryCode}/${city}`);
-  };
+  const onClickHandler = useCallback((city, countryCode) => {
+    navigate(`/city/${countryCode}/${city}`);
+  }, [navigate]);
 
   return (
     <AppFrame>
@@ -19,8 +19,6 @@ const MainPage = ({ data, actions }) => {
         <CityList
           cities={cities}
           onClickCity={onClickHandler}
-          data={data}
-          actions={actions}
         />
       </Paper>
     </AppFrame>
